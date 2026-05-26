@@ -56,31 +56,21 @@ type Streamer struct{}
 
 // NewStreamer creates a new streamer instance.
 func NewStreamer() *Streamer {
-	return &Streamer{}
+	_ = "STUB: not implemented"
+
+	// Consume returns a channel that streams orders. The channel
+	// is closed when all orders are sent or when the context
+	// is done.
+	return nil
 }
 
-// Consume returns a channel that streams orders. The channel
-// is closed when all orders are sent or when the context
-// is done.
 func (s *Streamer) Consume(ctx context.Context) <-chan order.Order {
+	_ = "STUB: not implemented"
 	// Most message broker APIs usually provide a way to stream messages
 	// using channels. Here we simulate that by creating a channel
 	// and sending predefined orders to it.
-	ch := make(chan order.Order)
-
-	go func() {
-		defer close(ch)
-
-		// Simulate streaming orders by sending them to the channel
-		// one by one.
-		for _, ord := range _orders {
-			select {
-			case <-ctx.Done():
-				return
-			case ch <- ord:
-			}
-		}
-	}()
-
-	return ch
+	return nil
 }
+
+// Simulate streaming orders by sending them to the channel
+// one by one.

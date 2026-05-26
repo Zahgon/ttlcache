@@ -2,12 +2,9 @@
 package server
 
 import (
-	"context"
-	"fmt"
 	"httpcache/internal/server/respcache"
 	"log/slog"
 	"net/http"
-	"time"
 )
 
 // Server contains required information to
@@ -20,58 +17,25 @@ type Server struct {
 
 // NewServer creates a new Server instance with
 // the specified address.
-func NewServer(addr string) *Server {
-	s := &Server{
-		log:   slog.Default().With("component", "server"),
-		cache: respcache.NewCache(time.Minute),
-	}
-
-	s.serv = &http.Server{
-		Addr:    addr,
-		Handler: s.router(),
-	}
-
-	return s
-}
+func NewServer(addr string) *Server { _ = "STUB: not implemented"; return nil }
 
 // Start starts the server. It blocks until the server.Stop is called.
-func (s *Server) Start() error {
-	s.log.With("addr", s.serv.Addr).Info("started web server")
-
-	return s.serv.ListenAndServe()
-}
+func (s *Server) Start() error { _ = "STUB: not implemented"; return nil }
 
 // Stop shuts down the server.
-func (s *Server) Stop() error {
-	s.cache.Stop()
-
-	return s.serv.Shutdown(context.Background())
-}
+func (s *Server) Stop() error { _ = "STUB: not implemented"; return nil }
 
 // router sets up the HTTP routes for the server.
-func (s Server) router() http.Handler {
-	mux := http.NewServeMux()
-
-	mux.Handle("GET /reports/{name}", s.cache.Handle(s.fetchReport))
-
-	return mux
-}
+func (s Server) router() http.Handler { _ = "STUB: not implemented"; return *new(http.Handler) }
 
 // fetchReport is the handler that fetches report information based on
 // the report name provided in the URL path.
 func (s Server) fetchReport(w http.ResponseWriter, r *http.Request) {
-	name := r.PathValue("name")
-
-	// For the demonstration purposes, the timer below acts
-	// as a placeholder for the actual report fetching logic.
-	select {
-	case <-time.After(5 * time.Second):
-		// OK.
-	case <-r.Context().Done():
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(fmt.Sprintf("Report %q fetched successfully!", name)))
+	_ = "STUB: not implemented"
+	return
 }
+
+// For the demonstration purposes, the timer below acts
+// as a placeholder for the actual report fetching logic.
+
+// OK.

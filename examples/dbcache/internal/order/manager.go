@@ -17,32 +17,11 @@ type Manager struct {
 }
 
 // NewManager creates a new order manager instance.
-func NewManager(streamer Streamer, db DB) *Manager {
-	return &Manager{
-		log:      slog.Default().With("component", "order-manager"),
-		db:       db,
-		streamer: streamer,
-	}
-}
+func NewManager(streamer Streamer, db DB) *Manager { _ = "STUB: not implemented"; return nil }
 
 // Run starts the order manager, consuming orders from the streamer
 // and updating the asset volumes in the database.
-func (m *Manager) Run(ctx context.Context) {
-	for ord := range m.streamer.Consume(ctx) {
-		vol, err := m.db.FetchAssetVolume(ctx, ord.Asset)
-		if err != nil {
-			m.log.With("error", err).Error("failed to fetch asset volume")
-			continue
-		}
-
-		vol += ord.Quantity
-
-		if err := m.db.UpsertAssetVolume(ctx, ord.Asset, vol); err != nil {
-			m.log.With("error", err).Error("failed to upsert asset volume")
-			continue
-		}
-	}
-}
+func (m *Manager) Run(ctx context.Context) { _ = "STUB: not implemented"; return }
 
 // Streamer is an interface that defines methods for
 // consuming orders from a stream.

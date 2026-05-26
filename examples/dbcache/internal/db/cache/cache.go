@@ -21,51 +21,24 @@ func NewCache(
 	db order.DB,
 	expiration time.Duration,
 ) *Cache {
-	c := ttlcache.New(
-		ttlcache.WithTTL[string, int64](expiration),
-	)
-
-	go c.Start()
-
-	return &Cache{
-		db:          db,
-		volumeCache: c,
-	}
-}
-
-// Close stops the cache and releases resources.
-func (c *Cache) Close() error {
-	c.volumeCache.Stop()
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
+// Close stops the cache and releases resources.
+func (c *Cache) Close() error { _ = "STUB: not implemented"; return nil }
+
 // FetchAssetVolume retrieves the volume for a given asset.
 func (c *Cache) FetchAssetVolume(ctx context.Context, asset string) (int64, error) {
-	if item := c.volumeCache.Get(asset); item != nil {
-		return item.Value(), nil
-	}
-
-	volume, err := c.db.FetchAssetVolume(ctx, asset)
-	if err != nil {
-		return 0, err
-	}
-
-	c.volumeCache.Set(asset, volume, ttlcache.DefaultTTL)
-
-	return volume, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 // UpsertAssetVolume updates or inserts the volume for a given asset.
 func (c *Cache) UpsertAssetVolume(ctx context.Context, asset string, volume int64) error {
-	err := c.db.UpsertAssetVolume(ctx, asset, volume)
-	if err != nil {
-		return err
-	}
-
-	// We set the volume after the upsert operation to ensure
-	// that cache is in sync with the database.
-	c.volumeCache.Set(asset, volume, ttlcache.DefaultTTL)
-
+	_ = "STUB: not implemented"
 	return nil
 }
+
+// We set the volume after the upsert operation to ensure
+// that cache is in sync with the database.
